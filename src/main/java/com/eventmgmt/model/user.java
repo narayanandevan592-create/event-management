@@ -2,39 +2,47 @@ package com.eventmgmt.model;
 
 import com.eventmgmt.model.interfaces.Displayable;
 
-public abstract class User implements Displayable {
 
-    protected String id;
+public abstract class User implements Displayable {
+    protected String id; // Accessible to derived subclasses[cite: 25]
     private String name;
     private String email;
     private String phone;
     private String password;
 
+    
     public User() {
-        this("", "Unknown", "unknown@example.com", "", "");
+        this.id = "";
+        this.name = "Unknown";
+        this.email = "unknown@example.com";
+        this.phone = "";
+        this.password = "";
     }
 
+   
     public User(String id, String name, String email, String phone) {
         this(id, name, email, phone, "");
     }
 
-    public User(String id, String name, String email,
-                String phone, String password) {
+    
+    public User(String id, String name, String email, String phone, String password) {
         this.id = id;
         setName(name);
         setEmail(email);
-        this.phone = phone;
-        setPassword(password);
+        this.phone = (phone != null) ? phone.trim() : "";
+        this.password = (password != null) ? password.trim() : "";
     }
 
+    
     public abstract String getRoleDescription();
 
+    
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = (id != null) ? id.trim() : "";
     }
 
     public String getName() {
@@ -45,7 +53,6 @@ public abstract class User implements Displayable {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("User name cannot be empty.");
         }
-
         this.name = name.trim();
     }
 
@@ -57,7 +64,6 @@ public abstract class User implements Displayable {
         if (email == null || !email.contains("@")) {
             throw new IllegalArgumentException("Invalid email format: " + email);
         }
-
         this.email = email.trim();
     }
 
@@ -66,7 +72,7 @@ public abstract class User implements Displayable {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = (phone != null) ? phone.trim() : "";
     }
 
     public String getPassword() {
@@ -74,21 +80,17 @@ public abstract class User implements Displayable {
     }
 
     public void setPassword(String password) {
-        if (password == null) {
-            this.password = "";
-        } else {
-            this.password = password.trim();
-        }
+        this.password = (password != null) ? password.trim() : "";
     }
+
 
     @Override
     public String getSummary() {
-        return "[" + getRoleDescription() + "] " + name + " (" + email + ")";
+        return String.format("[%s] %s (%s)", getRoleDescription(), name, email);[cite: 25]
     }
 
     @Override
     public String toString() {
-        return "User{id='" + id + "', name='" + name
-                + "', email='" + email + "'}";
+        return "User{id='" + id + "', name='" + name + "', email='" + email + "'}";[cite: 25]
     }
 }
