@@ -158,7 +158,7 @@ event-management-system/
                     ├── EventPanel.java # Feature 1: Event Management
                     ├── ParticipantRegistrationPanel.java # Feature 2: Participants & Registration
                     ├── SessionSchedulePanel.java         # Feature 3: Sessions & Schedules
-                    └── OopVivaGuidePanel.java            # Built-in Viva reference & DB test
+
 ```
 
 ---
